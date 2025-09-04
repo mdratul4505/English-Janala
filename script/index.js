@@ -30,9 +30,49 @@ const loadWordDetail = (id)=>{
     .then(details => displayWordDetails(details.data))
 }
 
+// "word": "Eager",
+// "meaning": "আগ্রহী",
+// "pronunciation": "ইগার",
+// "level": 1,
+// "sentence": "The kids were eager to open their gifts.",
+// "points": 1,
+// "partsOfSpeech": "adjective",
+// "synonyms": [
+// "enthusiastic",
+// "excited",
+// "keen"
+// ],
+// "id": 5
+
 const displayWordDetails = (word) =>{
     const detailsBox = document.getElementById('details-container')
-    detailsBox.innerHTML = '';
+    detailsBox.innerHTML = `
+    <div>
+      <h2 class="text-2xl font-bold">${word.word} (  <i class="fa-solid fa-microphone-lines"></i>   :${word.pronunciation}) </h2>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold font-bangla">Meaning</h2>
+      <p>${word.meaning}</p>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold font-bangla">Example</h2>
+      <p>${word.sentence}</p>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold font-bangla">সমার্থক শব্দ গুলো</h2>
+      <span class="btn bg-[#D7E4EF]"> span1</span>
+      <span class="btn bg-[#D7E4EF]"> span2</span>
+      <span class="btn bg-[#D7E4EF]"> span3</span>
+    </div>
+    <button class="btn bg-[#422AD5] text-white">Complete Learning</button>
+     <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn bg-[#422AD5] text-white">Close</button>
+      </form>
+    </div>
+  </div>
+    `;
     document.getElementById('my_modal_5').showModal();
 }
 
