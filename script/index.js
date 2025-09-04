@@ -15,6 +15,7 @@ const removeActive = ()=>{
     lessonButton.forEach(button => button.classList.remove('active'))
 }
 const loadLevelWord =(id)=>{
+    manageSpinner(true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     fetch(url)
     .then(res => res.json())
@@ -36,6 +37,18 @@ const loadWordDetail = (id)=>{
     .then(res => res.json())
     .then(details => displayWordDetails(details.data))
 }
+
+const manageSpinner = (status) =>{
+    if(status == true){
+        document.getElementById('spinner').classList.remove('hidden')
+        document.getElementById('word-container').classList.add('hidden')
+    }
+    else{
+        document.getElementById('spinner').classList.add('hidden')
+        document.getElementById('word-container').classList.remove('hidden')
+    }
+    }
+
 
 // "word": "Eager",
 // "meaning": "আগ্রহী",
@@ -113,6 +126,7 @@ wordContainer.innerHTML = '';
         `
         wordContainer.appendChild(cardDiv)
     });
+    manageSpinner(false);
 }
 
 const displayLesson = (lessons) =>{
@@ -132,3 +146,17 @@ lessons.forEach(lesson => {
 });
 }
 loadLessons()
+document.getElementById('btn-search').addEventListener('click', () =>{
+    removeActive()
+     const input = document.getElementById('input-search')
+     const searchValue = input.value.trim().toLowerCase();
+     
+
+     fetch('https://openapi.programming-hero.com/api/words/all')
+     .then(res => res.json())
+     .then (data => {
+        const allWord = data.data;
+        const filterWords = allWord.filter(word =>word.word.toLowerCase().includes(searchValue))
+       displayLevelWord(filterWords)
+     })
+})
