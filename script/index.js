@@ -1,3 +1,9 @@
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const createElement = (arr) =>{
     
 
@@ -50,19 +56,7 @@ const manageSpinner = (status) =>{
     }
 
 
-// "word": "Eager",
-// "meaning": "আগ্রহী",
-// "pronunciation": "ইগার",
-// "level": 1,
-// "sentence": "The kids were eager to open their gifts.",
-// "points": 1,
-// "partsOfSpeech": "adjective",
-// "synonyms": [
-// "enthusiastic",
-// "excited",
-// "keen"
-// ],
-// "id": 5
+
 
 const displayWordDetails = (word) =>{
     const detailsBox = document.getElementById('details-container')
@@ -119,7 +113,7 @@ wordContainer.innerHTML = '';
             <p class=" bangla-font text-3xl font-semibold text-[#18181B]">"${word.meaning ? word.meaning : 'dont found the meaning'} / ${word.pronunciation ? word.pronunciation : 'dont found the pronunciation'}"</p>
             <div class="flex justify-between items-center mt-10">
                 <button  onclick="loadWordDetail(${word.id})" class="btn bg-[#1a91ff1a] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
-                <button class="btn bg-[#1a91ff1a]  hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
+                <button onclick ="pronounceWord('${word.word}')" class="btn bg-[#1a91ff1a]  hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
 
             </div>
         </div>
